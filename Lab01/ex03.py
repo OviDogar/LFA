@@ -6,14 +6,6 @@ def invers(s):
 
 E=["", "0", "1", "2"]
 
-# for i in range(4):
-#     for j in range(4):
-#         for k in range(4):
-#             a=str(E[i])+str(E[j])
-#             b=str(E[k])
-#             print(a+b+invers(a))
-
-counter=0
 lista=[]
 
 for i in range(4):
