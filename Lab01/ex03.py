@@ -11,7 +11,7 @@ lista=[]
 for i in range(4):
     for j in range(4):
         for k in range(4):
-            if i>j: #  ppee
+            if i>j: #  evitam dublarea aceluiasi string
                 continue
             a=str(E[i])+str(E[j])
             b=str(E[k])
