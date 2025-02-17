@@ -1,7 +1,5 @@
 # exercitiul 4
 
-# setati maxLen la valoarea dorita pentru a genera cuvinte de lungime maxLen
-
 V = {"S", "A", "B"}
 T = {"a", "b"}
 P = {
