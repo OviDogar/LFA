@@ -1,8 +1,9 @@
 Nume Client: Ovidiu Popescu
+CNP: 177100826444533
 Adresa: Strada D.Pietros 13, Targu Mures
-Telefon: 0722123456
+Telefon: 072212345d6
 
-Cod Produs: VOSTRO123
+Cod Produs: VOSTRO123dsdsssds
 Denumire: Laptop
 Cantitate: 1.00
 Pret: 2999.99
