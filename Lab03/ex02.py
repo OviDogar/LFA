@@ -40,25 +40,21 @@
             return {"success": False, "message": f"Locul {spot_number} este deja liber"}
         
         self.parking_spots[spot_index] = False
-        return {"success": True, "message": f"Masina a fost scoasă cu succes de pe locul {spot_number}"}
+        return {"success": True, "message": f"Masina a fost scoasa cu succes de pe locul {spot_number}"}
     
     def find_free_spot(self):
         for i, occupied in enumerate(self.parking_spots):
             if not occupied:
-                return i + 1  # Returnam numarul locului (indexul + 1)
-        return None  # Nu exista locuri libere
+                return i + 1  # returnam numarul locului (indexul + 1)
+        return None  # nu exista locuri libere
 
 
 def main():
-
-    # cerem de la consola numarul de locuri din parcare
 
     print("Introduceti numarul de locuri din parcare: ")
     total_spots = int(input())
 
     parking = ParkingAutomaton(total_spots)
-
-    # creem un meniu in consola pentru a parca si a scoate masini
 
     while True:
         print("\n1. Parcare masina")
