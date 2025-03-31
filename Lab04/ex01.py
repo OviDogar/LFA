@@ -1,56 +1,55 @@
-class MooreMachine:
+class Automaton:
     def __init__(self):
-        self.states = ['Q0', 'Q1', 'Q2', 'Q3', 'Q4']
+        self.states = ['q0', 'q1', 'q2', 'q3', 'q4']
         self.inputs = ['a', 'b']
         self.transition_function = {
-            ('Q0', 'a'): 'Q1',
-            ('Q1', 'a'): 'Q1',
-            ('Q2', 'a'): 'Q3',
-            ('Q2', 'b'): 'Q2',
-            ('Q2', 'b'): 'Q3',
-            ('Q3', 'a'): 'Q3',
-            ('Q3', 'b'): 'Q1',
+            ('q0', 'a'): ['q1', 'q2', 'q3', 'q4'],
+            ('q1', 'a'): ['q1', 'q2', 'q3', 'q4'],
+            ('q1', 'b'): ['q2', 'q3', 'q4'],
+            ('q2', 'a'): ['q3', 'q4'],
+            ('q2', 'b'): ['q3', 'q4'],
+            ('q3', 'a'): ['q3', 'q4'],
+            ('q3', 'b'): ['q1', 'q2', 'q3', 'q4'],
         }
-        self.current_state = 'Q0'
-    
+        self.current_state = 'q0'
+
     def process_input(self, input_symbol):
         if input_symbol not in self.inputs:
             raise ValueError(f"Input invalid: {input_symbol}. Trebuie sa fie unul dintre {self.inputs}")
-        
-        output = self.output_function[self.current_state]
-        
-        self.current_state = self.transition_function[(self.current_state, input_symbol)]
-        
-        return output
-    
+
+        # Verificam daca exista o tranzitie pentru starea curenta si simbolul de intrare
+        transition_key = (self.current_state, input_symbol)
+        if transition_key in self.transition_function:
+            # Alegem doar prima stare posibila din lista (automat determinist)
+            self.current_state = self.transition_function[transition_key][0]
+        else:
+            raise ValueError(f"Nu exista tranzitie pentru ({self.current_state}, {input_symbol})")
+
+        return self.current_state  # Consideram ca iesirea este noua stare
+
     def process_sequence(self, input_sequence):
         outputs = []
         for input_symbol in input_sequence:
             output = self.process_input(input_symbol)
             outputs.append(output)
         return outputs
-    
+
     def get_current_state(self):
         return self.current_state
-    
-    def get_current_output(self):
-        return self.output_function[self.current_state]
-    
+
     def reset(self):
-        self.current_state = 'S1'
+        self.current_state = 'q0'
+
 
 if __name__ == "__main__":
-    moore_m = MooreMachine()
-    
-    input_sequence = ['A', 'B', 'B', 'A', 'B']
+    automat = Automaton()
+
+    input_sequence = ['a', 'b', 'a', 'b', 'a', 'b']
     outputs = []
-    
-    print(f"Stare initiala: {moore_m.get_current_state()}")
-    
+
+    print(f"Stare initiala: {automat.get_current_state()}")
+
     for i, symbol in enumerate(input_sequence):
-        output = moore_m.process_input(symbol)
+        output = automat.process_input(symbol)
         outputs.append(output)
-        print(f"Intrare: {symbol}, Iesire: {output}, Stare noua: {moore_m.get_current_state()}")
-    
-    print("\nIntrare:", input_sequence)
-    print("Iesire:", outputs)
+        print(f"Intrare: {symbol}, Stare noua: {automat.get_current_state()}")
